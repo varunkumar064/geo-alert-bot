@@ -36,9 +36,8 @@ geo-alert-bot/
 │── .gitignore
 │── README.md
 
-
-
-
+```
+---
 ## How It Works
 - User opens the hosted webpage
 - Browser requests location permission
