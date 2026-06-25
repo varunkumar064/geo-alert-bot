@@ -51,7 +51,7 @@ geo-alert-bot/
 ## Setup
 
 1. Clone the repository
-        git clone https://github.com/your-username/geo-alert-bot.git
+        git clone https://github.com/varunkumar064/geo-alert-bot.git
         cd geo-alert-bot
 2. Create and activate a virtual environment
         python3 -m venv venv
