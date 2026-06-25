@@ -39,7 +39,7 @@ geo-alert-bot/
 
 
 
-How It Works
+## How It Works
 - User opens the hosted webpage
 - Browser requests location permission
 - If permission is granted, latitude/longitude are captured
@@ -49,7 +49,7 @@ How It Works
 
 
 
-Setup
+## Setup
 
 1. Clone the repository
         git clone https://github.com/your-username/geo-alert-bot.git
